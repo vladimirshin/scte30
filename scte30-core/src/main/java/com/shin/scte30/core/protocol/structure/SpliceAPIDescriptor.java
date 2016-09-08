@@ -14,7 +14,7 @@
  *  the License.
  */
 
-package com.shin.scte30.core.protocol;
+package com.shin.scte30.core.protocol.structure;
 
 
 import java.nio.ByteBuffer;
@@ -27,7 +27,7 @@ import java.nio.ByteBuffer;
  * format for descriptors used in this standard.
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
-public class SpliceAPIDescriptor extends Packet {
+public class SpliceAPIDescriptor extends AbstractStructure {
 
     private final int BASE_SIZE = 6*8;
 
@@ -43,8 +43,7 @@ public class SpliceAPIDescriptor extends Packet {
         allocate(this.BASE_SIZE + length);
     }
 
-    @Override
-    public ByteBuffer build() {
+    @Override public ByteBuffer build() {
         return this.buffer;
     }
 

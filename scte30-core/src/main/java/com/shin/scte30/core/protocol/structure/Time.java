@@ -14,7 +14,7 @@
  *  the License.
  */
 
-package com.shin.scte30.core.protocol;
+package com.shin.scte30.core.protocol.structure;
 
 
 import java.nio.ByteBuffer;
@@ -24,27 +24,21 @@ import java.nio.ByteBuffer;
  * The time structure is used to define various times in this specification.
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
-public class Time extends Packet {
+public class Time extends AbstractStructure {
 
-    private final int SIZE = 8; // 8 bytes
+    private final int BASE_SIZE = 8; // 8 bytes
 
     private final int seconds;
     private final int microseconds;
 
     public Time(final int seconds, final int microseconds) {
-        allocate(this.SIZE);
         this.seconds = seconds;
         this.microseconds = microseconds;
+
+        allocate(this.BASE_SIZE);
     }
 
-    @Override
-    public ByteBuffer build() {
-//        if (seconds <= 0)
-//            throw new IllegalArgumentException("Seconds field is invalid");
-//
-//        if (microseconds <= 0)
-//            throw new IllegalArgumentException("Microseconds field is invalid");
-
+    @Override public ByteBuffer build() {
         this.buffer.putInt(this.seconds);
         this.buffer.putInt(this.microseconds);
 

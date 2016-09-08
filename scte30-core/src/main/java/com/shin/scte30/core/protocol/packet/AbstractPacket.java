@@ -14,8 +14,10 @@
  *  the License.
  */
 
-package com.shin.scte30.core.protocol;
+package com.shin.scte30.core.protocol.packet;
 
+
+import com.shin.scte30.core.protocol.MessageID;
 
 import java.nio.ByteBuffer;
 
@@ -24,7 +26,7 @@ import java.nio.ByteBuffer;
  * The time structure is used to define various times in this specification.
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
-public abstract class Packet implements MessageID {
+public abstract class AbstractPacket implements MessageID {
 
     protected ByteBuffer buffer;
 
