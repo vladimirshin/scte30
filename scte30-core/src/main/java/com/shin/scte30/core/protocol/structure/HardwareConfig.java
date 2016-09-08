@@ -14,25 +14,11 @@
  *  the License.
  */
 
-package com.shin.scte30.core.protocol.packet;
-
-
-import java.nio.ByteBuffer;
-
-import com.shin.scte30.core.protocol.MessageID;
+package com.shin.scte30.core.protocol.structure;
 
 
 /**
- * The time structure is used to define various times in this specification.
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
-public abstract class AbstractPacket implements MessageID {
-
-    protected ByteBuffer buffer;
-
-    protected void allocate(final int size) {
-        this.buffer = ByteBuffer.allocate(size);
-    }
-
-    public abstract ByteBuffer build();
+public class HardwareConfig {
 }

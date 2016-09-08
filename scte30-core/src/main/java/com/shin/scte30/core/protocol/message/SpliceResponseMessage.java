@@ -14,25 +14,15 @@
  *  the License.
  */
 
-package com.shin.scte30.core.protocol.packet;
-
-
-import java.nio.ByteBuffer;
-
-import com.shin.scte30.core.protocol.MessageID;
+package com.shin.scte30.core.protocol.message;
 
 
 /**
- * The time structure is used to define various times in this specification.
+ * The data() field for the Splice_Response message contains the Splice_Response_Data structure outlined below.
+ * The Splice_Response_Message may contain an error code if appropriate. The Splice_Offset is used by the
+ * Splicer to inform the Server of a time offset for the delivery of the content for this message. This
+ * does not affect the point in the primary channel where the splice will occur.
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
-public abstract class AbstractPacket implements MessageID {
-
-    protected ByteBuffer buffer;
-
-    protected void allocate(final int size) {
-        this.buffer = ByteBuffer.allocate(size);
-    }
-
-    public abstract ByteBuffer build();
+public class SpliceResponseMessage {
 }

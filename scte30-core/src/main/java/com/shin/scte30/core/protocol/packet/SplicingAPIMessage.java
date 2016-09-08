@@ -29,6 +29,8 @@ import java.nio.ByteBuffer;
  */
 public class SplicingAPIMessage extends AbstractPacket {
 
+    private final int BASE_SIZE = 8;
+
     private final short MESSAGE_ID;
     private final short MESSAGE_SIZE;
 
@@ -37,11 +39,13 @@ public class SplicingAPIMessage extends AbstractPacket {
 
     private final Payload payload;
 
-    public SplicingAPIMessage(final  Payload payload) {
+    public SplicingAPIMessage(final Payload payload) {
         this.payload = payload;
 
-        this.MESSAGE_ID = (short) this.payload.id();
-        this.MESSAGE_SIZE = (short) this.payload.size();
+        this.MESSAGE_ID = (short) payload.id();
+        this.MESSAGE_SIZE = (short) payload.size();
+
+        allocate(this.BASE_SIZE + payload.size());
     }
 
     @Override public ByteBuffer build() {
