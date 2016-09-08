@@ -37,6 +37,7 @@ public class Time extends Packet {
         this.microseconds = microseconds;
     }
 
+    @Override
     public ByteBuffer build() {
 //        if (seconds <= 0)
 //            throw new IllegalArgumentException("Seconds field is invalid");
