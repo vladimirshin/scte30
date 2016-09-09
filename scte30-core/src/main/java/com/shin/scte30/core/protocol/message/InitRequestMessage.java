@@ -17,6 +17,14 @@
 package com.shin.scte30.core.protocol.message;
 
 
+import java.util.List;
+import java.util.LinkedList;
+
+import com.shin.scte30.core.protocol.structure.Version;
+import com.shin.scte30.core.protocol.structure.HardwareConfig;
+import com.shin.scte30.core.protocol.structure.SpliceAPIDescriptor;
+
+
 /**
  * The initial communication begins with the Splicer listening on the predefined port 5168 and a Server
  * opening an API Connection to the Splicer. The Server sends an Init_Request message to the Splicer.
@@ -30,4 +38,21 @@ package com.shin.scte30.core.protocol.message;
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
 public class InitRequestMessage {
+
+    private final Version VERSION;
+    private final String CHANNEL_NAME;
+    private final String SPLICER_NAME;
+    private final HardwareConfig HARDWARE_CONFIG;
+
+    private final List<SpliceAPIDescriptor> SPLICE_API_LIST = new LinkedList<>();
+
+    public InitRequestMessage(final Version version,
+                              final String channelName,
+                              final String splicerName,
+                              final HardwareConfig hardwareConfig) {
+        this.VERSION = version;
+        this.CHANNEL_NAME = channelName;
+        this.SPLICER_NAME = splicerName;
+        this.HARDWARE_CONFIG = hardwareConfig;
+    }
 }
