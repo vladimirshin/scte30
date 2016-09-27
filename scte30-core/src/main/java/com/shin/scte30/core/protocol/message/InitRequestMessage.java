@@ -17,9 +17,12 @@
 package com.shin.scte30.core.protocol.message;
 
 
+import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.LinkedList;
+import java.io.UnsupportedEncodingException;
 
+import com.shin.scte30.core.protocol.packet.AbstractPacket;
 import com.shin.scte30.core.protocol.structure.Version;
 import com.shin.scte30.core.protocol.structure.HardwareConfig;
 import com.shin.scte30.core.protocol.structure.SpliceAPIDescriptor;
@@ -37,7 +40,9 @@ import com.shin.scte30.core.protocol.structure.SpliceAPIDescriptor;
  * API Connections.
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
-public class InitRequestMessage {
+public class InitRequestMessage extends AbstractPacket {
+
+    private final String CHARSET = "UTF-8";
 
     private final Version VERSION;
     private final String CHANNEL_NAME;
@@ -54,5 +59,24 @@ public class InitRequestMessage {
         this.CHANNEL_NAME = channelName;
         this.SPLICER_NAME = splicerName;
         this.HARDWARE_CONFIG = hardwareConfig;
+    }
+
+    @Override public ByteBuffer build() {
+        if (this.buffer == null)
+            return ByteBuffer.wrap(new byte[0]);
+
+        if (this.VERSION == null || this.CHANNEL_NAME == null || this.SPLICER_NAME == null)
+            return ByteBuffer.wrap(new byte[0]);
+
+        try {
+            this.buffer.put(this.VERSION.build()); // version structure
+
+            this.buffer.put(this.CHANNEL_NAME.getBytes(this.CHARSET));
+            this.buffer.put(this.SPLICER_NAME.getBytes(this.CHARSET));
+        } catch (final UnsupportedEncodingException exception) {
+            // TODO
+        }
+
+        return this.buffer;
     }
 }
