@@ -18,7 +18,37 @@ package com.shin.scte30.core.protocol.structure;
 
 
 /**
+ * Hardware_Config
+ * This structure describes the hardware interface between the Server and the Splicer.
+ * It is important for the Splicer to know exactly where the Server is connected so that
+ * the Splicer knows what Multiplex is being referenced. An example of this link would be
+ * a DVB-ASI connection from the Server to the Splicer.
+ *
+ * Basic structure looks like:
+ * Hardware_Config{
+ *     Length
+ *     Chassis
+ *     Card
+ *     Port
+ *     Logical_Multiplex_Type
+ *     Logical_Multiplex()
+ * }
  * @author Vladimir Shin [vladimir.shin@gmail.com]
  */
 public class HardwareConfig {
+
+    private final short LENGTH;
+    private final short CHASSIS;
+    private final short CARD;
+    private final short PORT;
+    private final MultiplexType LOGICAL_MULTIPLEX_TYPE;
+
+    public HardwareConfig(short length, short chassis, short card, short port, MultiplexType multiplexType) {
+        this.LENGTH = length;
+        this.CHASSIS = chassis;
+        this.CARD = card;
+        this.PORT = port;
+        this.LOGICAL_MULTIPLEX_TYPE = multiplexType;
+    }
+
 }
